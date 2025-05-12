@@ -3,17 +3,18 @@ import "./Footer.css";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from "@mui/icons-material/Twitter";
 
 function Footer() {
   return (
     <div className="container footer">
       <div className="row">
         <div className=" col justify-content-center">
-          <ul className="list-unstyled">
+          <ul className="list-unstyled lists">
             <li>
-              <FacebookIcon /> <InstagramIcon /> <YouTubeIcon />
+              <FacebookIcon /> <TwitterIcon /> <InstagramIcon /> <YouTubeIcon />
             </li>
-          
+
             <li>
               <a href="/">investor relation</a>
             </li>

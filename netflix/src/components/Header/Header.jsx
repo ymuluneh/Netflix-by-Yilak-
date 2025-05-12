@@ -28,6 +28,7 @@ function Header() {
             <Nav.Link href="#action2">TV Shows</Nav.Link>
             <Nav.Link href="#action2">Movies</Nav.Link>
             <Nav.Link href="#action2">New & Popular</Nav.Link>
+            <Nav.Link href="#action2">Games</Nav.Link>
             <Nav.Link href="#action2">My List</Nav.Link>
             <Nav.Link href="#action2">Browse by Languages</Nav.Link>
           </Nav>
@@ -40,13 +41,12 @@ function Header() {
               aria-label="Search"
             />
 
-         
-              <SearchIcon />
-          
+            <SearchIcon />
+
             <NotificationsActiveIcon />
-            <AccountBoxIcon/>
-            <ArrowDropDownCircleIcon/>
-            
+            <Nav.Link href="#action2">kids</Nav.Link>
+            <AccountBoxIcon />
+            <ArrowDropDownCircleIcon />
           </Form>
         </Navbar.Collapse>
       </Container>
