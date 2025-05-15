@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import instance from "./Axios";
+import instance from "../../../Utilis/Axios";
 import YouTube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import "./Row.css";
+import { alignPropType } from "react-bootstrap/esm/types";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
@@ -32,8 +33,10 @@ function Row({ title, fetchUrl, isLargeRow }) {
   };
 
   const opts = {
-    height: "390",
+    height: "370",
     width: "100%",
+    margion: "auto",
+    alignPropType: "center",
     playerVars: {
       autoplay: 1,
     },

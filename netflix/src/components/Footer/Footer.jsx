@@ -1,8 +1,8 @@
 import React from "react";
 import "./Footer.css";
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import TwitterIcon from "@mui/icons-material/Twitter";
 
 function Footer() {
@@ -19,11 +19,16 @@ function Footer() {
               <a href="/">investor relation</a>
             </li>
             <li>
-              <a href="/">privecy</a>
+              <a href="/"></a>
             </li>
             <li>
               <a href="/">
                 servic code &copy; <br /> 1997-2025 inc
+              </a>
+            </li>
+            <li>
+              <a className="yilak" href="http://www.yilakmuluneh.com" target="_blank">
+                Developed by Yilak M
               </a>
             </li>
           </ul>

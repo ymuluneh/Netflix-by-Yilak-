@@ -17,3 +17,21 @@ lists, ul li  a:hover{
     width: 80%;
     margin: 0 auto;
 }
+.yilak{
+    border: #fff 1px solid;
+    padding: 5px;
+    border-radius: 5px;
+  
+    margin-top: 20px;
+    
+}
+@media screen and (max-width: 768px) {
+    .row {
+      display: block;
+      overflow-x: hidden;
+      width: 96%;
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+    }
+  }
