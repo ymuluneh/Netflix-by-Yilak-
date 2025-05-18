@@ -23,12 +23,7 @@ function Footer() {
             </li>
             <li>
               <a href="/">
-                servic code &copy; <br /> 1997-2025 inc
-              </a>
-            </li>
-            <li>
-              <a className="yilak" href="http://www.yilakmuluneh.com" target="_blank">
-                Developed by Yilak M
+                <p>service code</p> <br /> &copy; 1997-2025 inc
               </a>
             </li>
           </ul>
@@ -75,6 +70,15 @@ function Footer() {
             </li>
             <li>
               <a href="">contact Us</a>
+            </li>
+            <li>
+              <a
+                className="yilak"
+                href="http://www.yilakmuluneh.com"
+                target="_blank"
+              >
+                Developed by Yilak M
+              </a>
             </li>
           </ul>
         </div>

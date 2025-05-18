@@ -11,7 +11,7 @@ lists, ul li  a{
 }
 lists, ul li  a:hover{
     text-decoration: underline;
-  
+    color :red  
 }
 .row{
     width: 80%;
@@ -21,17 +21,40 @@ lists, ul li  a:hover{
     border: #fff 1px solid;
     padding: 5px;
     border-radius: 5px;
+
   
     margin-top: 20px;
+    
+}
+
+.footer a p{
+    border: #fff 1px solid;
+    padding-left: 0;
+    border-radius: 5px;
+    width: 50%;
+    color: #fff;
+  
+    display: inline;
     
 }
 @media screen and (max-width: 768px) {
     .row {
       display: block;
       overflow-x: hidden;
-      width: 96%;
+      width: 100%;
       margin: 0 auto;
       padding: 0;
       text-align: center;
     }
+
+    .footer a p{
+       
+        width: 25%;
+        color: #fff;
+      text-align: center;
+    
+        
+    }
+
+   
   }

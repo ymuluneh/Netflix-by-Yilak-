@@ -29,14 +29,17 @@
     max-height: 250px;
   }
   
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 540px) {
     .row__posters {
-      display: block;
+      display: flex;
       overflow-x: hidden;
-      width: 96%;
-      margin: 0 auto;
-      padding: 0;
+      width: 100%;
+      /* margin: 0 auto; */
+      /* padding: 0; */
       text-align: center;
     }
+  }
+  h2:hover{
+    color: red;
   }
   

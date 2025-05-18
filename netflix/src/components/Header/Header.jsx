@@ -1,76 +1,158 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Logo from "../../assets/images/images.jpeg";
-import "./Header.css";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import SearchIcon from "@mui/icons-material/Search";
-import ArrowDropDownCircleIcon from "@mui/icons-material/ArrowDropDownCircle";
+import React, { useState, useEffect, useRef } from "react";
+import Logo from '../../assets/images/image.png'; 
+import './header.css';
+import SearchIcon from '@mui/icons-material/Search';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import MenuIcon from "@mui/icons-material/Menu";
 
-function Header() {
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const handleSearch = () => {
-    if (searchQuery.trim() !== "") {
-      console.log("Searching for:", searchQuery);
-      window.location.href = `/search?query=${encodeURIComponent(searchQuery)}`;
-    } else {
-      alert("Please enter a search term.");
-    }
+const Header = () => {
+    const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+    const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
-    // const handleKeyPress = (event) => {
-    //   if (event.key === "Enter") {
-    //     handleSearch();
-    //   }
-    // };
+    // Refs for click outside functionality
+    const profileDropdownRef = useRef(null);
+    const mobileNavRef = useRef(null); // Ref for the mobile navigation list (ul)
+    const mobileNavToggleRef = useRef(null); // Ref for the mobile navigation toggle button
 
-  };
- 
+    const toggleMobileNav = () => {
+        setIsMobileNavOpen(!isMobileNavOpen);
+    };
 
-  return (
-    <Navbar expand="lg" className="bg-body-tertiary">
-      <Container fluid className="header__nav">
-        <Navbar.Brand href="#">
-          <img src={Logo} alt="logo png" width="50px" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav className="me-auto my-2 my-lg-0" navbarScroll>
-            <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">TV Shows</Nav.Link>
-            <Nav.Link href="#action2">Movies</Nav.Link>
-            <Nav.Link href="#action2">New & Popular</Nav.Link>
-            <Nav.Link href="#action2">Games</Nav.Link>
-            <Nav.Link href="#action2">My List</Nav.Link>
-            <Nav.Link href="#action2">Browse by Languages</Nav.Link>
-          </Nav>
+    const toggleProfileDropdown = () => {
+        setIsProfileDropdownOpen(!isProfileDropdownOpen);
+    };
 
-          {/* Search Input and Button */}
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search..."
-              className="me-2"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button variant="outline-success" onClick={handleSearch}>
-              <SearchIcon />
-            </Button>
-          </Form>
+    // Handle click outside for both dropdowns
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            // Profile Dropdown
+            if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+                setIsProfileDropdownOpen(false);
+            }
 
-          <NotificationsActiveIcon />
-          {/* <Nav.Link href="#action2">Kids</Nav.Link> */}
-          <AccountBoxIcon />
-          <ArrowDropDownCircleIcon />
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
-  );
-}
+            // Mobile Navigation
+            if (isMobileNavOpen && // Only run if mobile nav is open
+                mobileNavRef.current && !mobileNavRef.current.contains(event.target) &&
+                mobileNavToggleRef.current && !mobileNavToggleRef.current.contains(event.target)
+            ) {
+                setIsMobileNavOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isMobileNavOpen, isProfileDropdownOpen]); // Add dependencies to re-run effect if states change (though mousedown is global)
+
+    // Handle header background on scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+
+    return (
+      <>
+        <div
+          className={`header-container ${isScrolled ? "scrolled" : ""} ${
+            isMobileNavOpen ? "mobile-nav-active" : ""
+          }`}
+        >
+          <div className="header-wrapper">
+            <div className="header-left">
+              <img src={Logo} alt="Netflix Logo" className="header-logo" />
+              <ul
+                ref={mobileNavRef}
+                className={`header-nav-links ${isMobileNavOpen ? "open" : ""}`}
+              >
+                <li>Home</li>
+                <li>TV Shows</li>
+                <li>Movies</li>
+                <li>Latest</li>
+                <li>My List</li>
+                <li>Browse by Languages</li>
+              </ul>
+            </div>
+
+            <div className="header-right">
+              <div className="header-icon-link">
+                <SearchIcon className="header-icon" />
+                <NotificationsNoneIcon className="header-icon" />
+
+                <div
+                  className="profile-menu-container"
+                  ref={profileDropdownRef}
+                >
+                  <div
+                    className="profile-activator"
+                    onClick={toggleProfileDropdown}
+                  >
+                    <AccountBoxIcon
+                      className={`header-icon profile-icon-main ${
+                        isProfileDropdownOpen ? "active" : ""
+                      }`}
+                    />
+                  </div>
+                  {isProfileDropdownOpen && (
+                    <div className="profile-dropdown">
+                      <div className="profile-dropdown-user">
+                        <AccountBoxIcon
+                          style={{ fontSize: "30px", marginRight: "10px" }}
+                        />
+                        <span>User Name</span> {/* Placeholder */}
+                      </div>
+                      <hr className="dropdown-divider-bold" />
+                      <p onClick={() => alert("Manage Profiles clicked")}>
+                        Manage Profiles
+                      </p>
+                      <p onClick={() => alert("Account clicked")}>Account</p>
+                      <p onClick={() => alert("Help Center clicked")}>
+                        Help Center
+                      </p>
+                      <hr className="dropdown-divider" />
+                      <p
+                        className="sign-out"
+                        onClick={() => alert("Signing out...")}
+                      >
+                        Sign Out of Netflix
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+              <KeyboardArrowDownIcon />
+
+              {/* Mobile Menu Toggle */}
+              <div
+                ref={mobileNavToggleRef}
+                className="mobile-menu-toggle"
+                onClick={toggleMobileNav}
+              >
+                <MenuIcon
+                  className={`header-icon mobile-nav-arrow ${
+                    isMobileNavOpen ? "open" : ""
+                  }`}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+};
 
 export default Header;
